@@ -1,0 +1,33 @@
+import { GymsRepository } from "@/repositories/gyms-repository";
+
+interface CreateGymUseCaseRequest {
+  title: string;
+  description: string | null;
+  phone: string | null;
+  latitude: number;
+  longitude: number;
+}
+
+export class GymUseCase {
+  constructor(private gymRepository: GymsRepository) {}
+
+  async execute({
+    title,
+    description,
+    phone,
+    latitude,
+    longitude,
+  }: CreateGymUseCaseRequest) {
+    const gym = await this.gymRepository.create({
+      title,
+      description,
+      phone,
+      latitude,
+      longitude,
+    });
+
+    return {
+      gym,
+    };
+  }
+}
