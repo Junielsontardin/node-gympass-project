@@ -1,4 +1,3 @@
-import { prisma } from "@/lib/prisma";
 import { UserAlreadyExistsError } from "@/services/errors/user-already-exists-error";
 import { makeRegisterUseCase } from "@/services/factories/make-register-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
@@ -32,12 +31,4 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
   }
 
   return reply.status(201).send();
-}
-
-export async function get(_: FastifyRequest, reply: FastifyReply) {
-  const users = await prisma.user.findMany();
-
-  return reply.status(200).send({
-    users,
-  });
 }
